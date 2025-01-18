@@ -223,11 +223,15 @@
             padding: 0;
         }
         header {
+            position: fixed;
+            top: 0;
+            width: 100%;
             background-color: #f4f4f4;
             padding: 10px 20px;
             display: flex;
             align-items: center;
             border-bottom: 1px solid #ddd;
+            z-index: 1000;
         }
         #backButton {
             font-size: 16px;
@@ -241,14 +245,25 @@
         #backButton:hover {
             text-decoration: underline;
         }
+        .content {
+            margin-top: 60px; /* To prevent overlap with the fixed header */
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
-    <!-- Header with Back Button -->
+    <!-- Fixed Header with Back Button -->
     <header>
         <button id="backButton">🔙 Back</button>
     </header>
     
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Main Content Area</h1>
+        <p>This is some content on the page. The back button at the top will not affect this content.</p>
+        <p>You can scroll down and still see the back button at the top.</p>
+    </div>
+
     <script>
         // Add click event listener to the button
         document.getElementById("backButton").addEventListener("click", function () {
