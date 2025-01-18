@@ -1,0 +1,203 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><body>
+</body>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAXAS Study Material</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #add8e6; /* Power blue */
+      color: #333;
+    }
+
+    header {
+      background: #003366;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    main {
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 80px; /* Add space at the bottom to prevent overlap with the footer */
+    }
+
+    .book-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .book {
+      background: orange;
+      color: green;
+      padding: 1rem;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .book button {
+      background: #003366;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .book button:hover {
+      background: #002244;
+    }
+
+    footer {
+      background: #003366;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .watermark {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-top: 10px;
+    }
+
+    .viewer {
+      margin: 2rem auto;
+      max-width: 90%;
+    }
+
+    .viewer iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #003366;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #002244;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Main Page Content -->
+<div id="mainContent">
+  <header>
+    <h1>MAXAS Study Material</h1>
+  </header>
+
+  <main>
+    <h2>Welcome to MAXAS Study Material</h2>
+    <p>Providing the best books, test papers, and test series for Class 9 and 10 students. All content is free.</p>
+
+    <!-- Display Books -->
+    <h3>Mathematics Books</h3>
+    <div class="book-list" id="bookList">
+      <!-- Books will be dynamically loaded here -->
+    </div>
+  </main>
+
+  <footer>
+    <div>Created by Akash Bhai</div>
+    <div>Email: akashkumarsinghgahiri@gmail.com</div>
+    <div class="watermark">© 2025 MAXAS Study Material. All rights reserved.</div>
+  </footer>
+</div>
+
+<!-- Viewer Page Content (Initially hidden) -->
+<div id="viewerContent" style="display:none;">
+  <header>
+    <h1>MAXAS Viewer</h1>
+  </header>
+
+  <div class="viewer">
+    <h2 id="bookTitle"></h2>
+    <iframe id="bookFrame"></iframe>
+    <button onclick="goBack()">Back to Main Page</button>
+  </div>
+
+  <footer>
+    <div>Created by Akash Bhai</div>
+    <div>Email: akashkumarsinghgahiri@gmail.com</div>
+    <div class="watermark">© 2025 MAXAS Study Material. All rights reserved.</div>
+  </footer>
+</div>
+
+<script>
+  // Dummy book storage (Simulating a database)
+  const books = [
+    { name: 'Mathematics Book', file: 'https://example.com/mathematics.pdf', folder: 'Mathematics' },
+    { name: 'Triangle.dpp', file: 'https://dxixtlyravvxx.cloudfront.net/540admin_v1/file_manager/pdf/201007990197024060.pdf', folder: 'Mathematics' },
+    { name: 'Science Book', file: 'https://example.com/science.pdf', folder: 'Science' },
+    { name: 'English Book', file: 'https://example.com/english.pdf', folder: 'English' }
+  ];
+
+  // Function to load books
+  function loadBooks() {
+    const bookList = document.getElementById('bookList');
+    bookList.innerHTML = ''; // Clear any existing content
+    books.forEach((book, index) => {
+      const bookDiv = document.createElement('div');
+      bookDiv.className = 'book';
+      bookDiv.innerHTML = `
+        <p>${book.name}</p>
+        <button onclick="viewBook(${index})">View Book</button>
+      `;
+      bookList.appendChild(bookDiv);
+    });
+  }
+
+  // Function to view a book
+  function viewBook(index) {
+    const book = books[index];
+    document.getElementById('bookTitle').textContent = book.name;
+    document.getElementById('bookFrame').src = book.file;
+
+    // Hide the main content and show the viewer content
+    document.getElementById('mainContent').style.display = 'none';
+    document.getElementById('viewerContent').style.display = 'block';
+  }
+
+  // Function to go back to the main page
+  function goBack() {
+    document.getElementById('viewerContent').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+  }
+
+  // Initial load of books
+  loadBooks();
+</script>
+
+</body>
+</html><style>body{
+  background-color:powderblue;
+}</style>
