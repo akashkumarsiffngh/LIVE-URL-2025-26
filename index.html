@@ -1,1 +1,864 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIVE CLASS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #2240aa, #1a3377);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 3px solid #ff9900;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .login-container {
+            padding: 30px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid #333;
+        }
+        
+        .login-box {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .login-box h2 {
+            margin-bottom: 20px;
+            color: #ffcc00;
+            font-size: 1.8rem;
+        }
+        
+        .login-input {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .login-input input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .login-input button {
+            padding: 15px 25px;
+            background: #ff9900;
+            color: #1a2a6c;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .login-input button:hover {
+            background: #ffcc00;
+        }
+        
+        .error {
+            color: #ff6b6b;
+            margin-top: 10px;
+            display: none;
+            font-weight: bold;
+        }
+        
+        .profile-section {
+            display: none;
+            padding: 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 500px;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(to right, #2240aa, #1a3377);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: 3px solid #ff9900;
+        }
+        
+        .profile-info {
+            text-align: left;
+        }
+        
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        
+        .profile-access {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-top: 5px;
+        }
+        
+        .content {
+            padding: 30px;
+            display: none;
+        }
+        
+        .schedule-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .schedule-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #ffcc00;
+            font-size: 2rem;
+        }
+        
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            max-width: 700px;
+        }
+        
+        .timetable th {
+            background: #2240aa;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        
+        .timetable td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #444;
+            font-size: 1.1rem;
+        }
+        
+        .timetable tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .timetable tr:hover {
+            background: rgba(34, 64, 170, 0.2);
+        }
+        
+        .today {
+            background: rgba(255, 204, 0, 0.2) !important;
+            font-weight: bold;
+        }
+        
+        .note {
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+            color: #ffcc00;
+        }
+        
+        .live-classes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .time-slot {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .time-slot h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .timer {
+            font-size: 1.2rem;
+            color: #ff9900;
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .live-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+        
+        .live-btn {
+            padding: 18px 10px;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-align: center;
+        }
+        
+        .live-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0.9;
+        }
+        
+        .maths {
+            background: linear-gradient(to right, #ff6b6b, #c0392b);
+        }
+        
+        .science {
+            background: linear-gradient(to right, #1dd1a1, #10ac84);
+        }
+        
+        .sst {
+            background: linear-gradient(to right, #54a0ff, #2e86de);
+        }
+        
+        .disabled {
+            background: #555 !important;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .access-info {
+            text-align: center;
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .full-access {
+            color: #1dd1a1;
+            font-weight: bold;
+        }
+        
+        .limited-access {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        
+        .current-time {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.3rem;
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        
+        .logout-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 25px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+        
+        .admin-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff9900;
+            color: #1a2a6c;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .admin-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid #ff9900;
+        }
+        
+        .admin-panel h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .user-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .user-card {
+            background: rgba(34, 64, 170, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .user-card h4 {
+            margin-bottom: 10px;
+            color: #ffcc00;
+        }
+        
+        .user-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .timetable th, .timetable td {
+                padding: 12px 8px;
+                font-size: 1rem;
+            }
+            
+            .live-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-list {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .login-box {
+                padding: 20px;
+            }
+            
+            .login-input {
+                flex-direction: column;
+            }
+            
+            .login-input input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            
+            .login-input button {
+                border-radius: 5px;
+                width: 100%;
+            }
+            
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-info {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="admin-badge" id="admin-badge" style="display: none;">
+            <i class="fas fa-crown"></i> ADMIN
+        </div>
+        
+        <div class="header">
+            <h1><i class="fas fa-calendar-alt"></i>LIVE CLASS</h1>
+            <p>KEY HINT:-The sum of the first 10 odd natural numbers is subtracted from the sum of the first 10 even natural numbers. What is the result? </p>
+        </div>
+        
+        <div class="login-container">
+            <div class="login-box">
+                <h2><i class="fas fa-lock"></i> LOGIN</h2>
+                <div class="login-input">
+                    <input type="password" id="password-input" placeholder="ENTER KEY...">
+                    <button id="login-submit">LOGIN</button>
+                </div>
+                <p class="error" id="login-error">WRONG KEY</p>
+            </div>
+        </div>
+        
+        <div class="profile-section" id="profile-section">
+            <div class="profile-header">
+                <div class="avatar">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="profile-info">
+                    <div class="profile-name" id="profile-name">Student</div>
+                    <div class="profile-access" id="profile-access">Access Level</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content" id="main-content">
+            <div class="schedule-container">
+                <h2><i class="fas fa-table"></i> Weekly Schedule</h2>
+                <table class="timetable">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>5:00 PM</th>
+                            <th>8:00 PM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="monday">
+                            <td>Monday</td>
+                            <td>SST</td>
+                            <td>Maths</td>
+                        </tr>
+                        <tr id="tuesday">
+                            <td>Tuesday</td>
+                            <td>SST</td>
+                            <td>Maths</td>
+                        </tr>
+                        <tr id="wednesday">
+                            <td>Wednesday</td>
+                            <td>Science</td>
+                            <td>SST</td>
+                        </tr>
+                        <tr id="thursday">
+                            <td>Thursday</td>
+                            <td>Science</td>
+                            <td>SST</td>
+                        </tr>
+                        <tr id="friday">
+                            <td>Friday</td>
+                            <td>Science</td>
+                            <td>Maths</td>
+                        </tr>
+                        <tr id="saturday">
+                            <td>Saturday</td>
+                            <td>Science</td>
+                            <td>Maths</td>
+                        </tr>
+                        <tr id="sunday">
+                            <td>Sunday</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="note">@BY LEARN AKASH</p>
+            </div>
+            
+            <div class="current-time" id="current-time">
+                Current time: Loading...
+            </div>
+            
+            <!-- Admin Panel (Only for 5 PM session) -->
+            <div class="admin-panel" id="admin-panel" style="display: none;">
+                <h3><i class="fas fa-user-cog"></i>LIVE SCHEDULE</h3>
+                <div class="live-buttons" id="admin-buttons">
+                    <!-- Admin buttons will be added here -->
+                </div>
+            </div>
+            
+            <div class="live-classes" id="student-classes">
+                <div class="time-slot">
+                    <h3><i class="far fa-clock"></i> 5:00 PM Session</h3>
+                    <div class="timer" id="timer-5pm">@LEARN AKASH</div>
+                    <div class="live-buttons" id="slot-5pm">
+                        <!-- Buttons will be added dynamically -->
+                    </div>
+                </div>
+                
+                <div class="time-slot">
+                    <h3><i class="far fa-clock"></i> 8:00 PM Session</h3>
+                    <div class="timer" id="timer-8pm">@LEARN AKASH</div>
+                    <div class="live-buttons" id="slot-8pm">
+                        <!-- Buttons will be added dynamically -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="access-info" id="access-info">
+                <!-- Access info will be displayed here -->
+            </div>
+            
+            <button class="logout-btn" id="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> LOGOUT
+            </button>
+        </div>
+    </div>
 
+    <script>
+        // DOM Elements
+        const passwordInput = document.getElementById('password-input');
+        const loginSubmit = document.getElementById('login-submit');
+        const loginError = document.getElementById('login-error');
+        const mainContent = document.getElementById('main-content');
+        const profileSection = document.getElementById('profile-section');
+        const profileName = document.getElementById('profile-name');
+        const profileAccess = document.getElementById('profile-access');
+        const accessInfo = document.getElementById('access-info');
+        const currentTimeEl = document.getElementById('current-time');
+        const slot5pm = document.getElementById('slot-5pm');
+        const slot8pm = document.getElementById('slot-8pm');
+        const logoutBtn = document.getElementById('logout-btn');
+        const adminBadge = document.getElementById('admin-badge');
+        const adminPanel = document.getElementById('admin-panel');
+        const adminButtons = document.getElementById('admin-buttons');
+        const studentClasses = document.getElementById('student-classes');
+        
+        // Subject URLs
+        const subjectUrls = {
+            'Maths': 'https://d1kw75zcv4u98c.cloudfront.net/out/v1/287810d967cc428e9bd992002e55b72c/index_1.m3u8',
+            'Science': 'https://d2xqn12y4qo6nr.cloudfront.net/out/v1/4dacc3cc62ed4047b817b91580e11584/index_1.m3u8',
+            'SST': 'https://d1kw75zcv4u98c.cloudfront.net/out/v1/c32c373c9874430cb6039408745a1a5e/index_4.m3u8'
+        };
+        
+        // State variables
+        let accessLevel = null;
+        let currentDayRow = null;
+        
+        // Update current time
+        function updateCurrentTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+            currentTimeEl.textContent = `Current time: ${timeString}`;
+        }
+        
+        // Highlight current day in schedule
+        function highlightCurrentDay() {
+            // Remove previous highlight
+            if (currentDayRow) {
+                currentDayRow.classList.remove('today');
+            }
+            
+            const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+            const now = new Date();
+            const dayIndex = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            
+            // Get the row for today
+            currentDayRow = document.getElementById(days[dayIndex]);
+            if (currentDayRow) {
+                currentDayRow.classList.add('today');
+            }
+        }
+        
+        // Check if current time is within class time window (1.5 hours)
+        function isWithinClassTime(startHour) {
+            const now = new Date();
+            const startTime = new Date();
+            startTime.setHours(startHour, 0, 0, 0); // Set to start hour
+            
+            const endTime = new Date(startTime);
+            endTime.setHours(startTime.getHours() + 1, 30); // 1.5 hours later
+            
+            return now >= startTime && now <= endTime;
+        }
+        
+        // Create subject button
+        function createSubjectButton(subject, timeSlot, isActive) {
+            const button = document.createElement('button');
+            button.className = `live-btn ${subject.toLowerCase()} ${isActive ? '' : 'disabled'}`;
+            
+            let icon, text;
+            switch(subject) {
+                case 'Maths':
+                    icon = '<i class="fas fa-calculator"></i>';
+                    text = 'Maths';
+                    break;
+                case 'Science':
+                    icon = '<i class="fas fa-flask"></i>';
+                    text = 'Science';
+                    break;
+                case 'SST':
+                    icon = '<i class="fas fa-globe-asia"></i>';
+                    text = 'SST';
+                    break;
+                default:
+                    icon = '<i class="fas fa-book"></i>';
+                    text = 'Class';
+            }
+            
+            button.innerHTML = `${icon} <span>${text}</span>`;
+            
+            if (isActive) {
+                button.onclick = function() {
+                    if (accessLevel === 'full') {
+                        // Admin can access any time
+                        window.open(subjectUrls[subject], '_blank');
+                    } else {
+                        // Regular users only during class time
+                        if (isWithinClassTime(timeSlot === '5pm' ? 17 : 20)) {
+                            window.open(subjectUrls[subject], '_blank');
+                        } else {
+                            alert('This class is not started yet');
+                        }
+                    }
+                };
+            } else {
+                button.onclick = function() {
+                    alert('This class is not started yet');
+                };
+            }
+            
+            return button;
+        }
+        
+        // Create admin buttons
+        function createAdminButtons() {
+            adminButtons.innerHTML = '';
+            
+            // Create Maths button
+            const mathsBtn = createSubjectButton('Maths', '5pm', true);
+            mathsBtn.innerHTML = '<i class="fas fa-calculator"></i> Maths Live';
+            adminButtons.appendChild(mathsBtn);
+            
+            // Create Science button
+            const scienceBtn = createSubjectButton('Science', '5pm', true);
+            scienceBtn.innerHTML = '<i class="fas fa-flask"></i> Science Live';
+            adminButtons.appendChild(scienceBtn);
+            
+            // Create SST button
+            const sstBtn = createSubjectButton('SST', '5pm', true);
+            sstBtn.innerHTML = '<i class="fas fa-globe-asia"></i> SST Live';
+            adminButtons.appendChild(sstBtn);
+        }
+        
+        // Render class buttons for students
+        function renderStudentClassButtons() {
+            // Clear existing buttons
+            slot5pm.innerHTML = '';
+            slot8pm.innerHTML = '';
+            
+            const todaysSchedule = getTodaysSchedule();
+            const startHour5pm = 17; // 5 PM in 24-hour format
+            const startHour8pm = 20; // 8 PM in 24-hour format
+            
+            // For 5pm slot
+            if (todaysSchedule['5pm']) {
+                const isActive = isWithinClassTime(startHour5pm);
+                const subjectBtn = createSubjectButton(todaysSchedule['5pm'], '5pm', isActive);
+                slot5pm.appendChild(subjectBtn);
+            } else {
+                slot5pm.innerHTML = '<p class="disabled">No class scheduled for today</p>';
+            }
+            
+            // For 8pm slot
+            if (todaysSchedule['8pm']) {
+                const isActive = isWithinClassTime(startHour8pm);
+                const subjectBtn = createSubjectButton(todaysSchedule['8pm'], '8pm', isActive);
+                slot8pm.appendChild(subjectBtn);
+            } else {
+                slot8pm.innerHTML = '<p class="disabled">No class scheduled for today</p>';
+            }
+        }
+        
+        // Get today's schedule
+        function getTodaysSchedule() {
+            const day = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+            const schedule = {
+                'Monday': { '5pm': 'SST', '8pm': 'Maths' },
+                'Tuesday': { '5pm': 'SST', '8pm': 'Maths' },
+                'Wednesday': { '5pm': 'Science', '8pm': 'SST' },
+                'Thursday': { '5pm': 'Science', '8pm': 'SST' },
+                'Friday': { '5pm': 'Science', '8pm': 'Maths' },
+                'Saturday': { '5pm': 'Science', '8pm': 'Maths' },
+                'Sunday': { '5pm': null, '8pm': null }
+            };
+            
+            return schedule[day];
+        }
+        
+        // Login submission
+        loginSubmit.addEventListener('click', () => {
+            const password = passwordInput.value;
+            
+            if (password === '22') {
+                accessLevel = 'full';
+                profileName.textContent = 'Admin Account';
+                profileAccess.textContent = 'Full Access Privileges';
+                profileAccess.style.color = '#1dd1a1';
+                loginError.style.display = 'none';
+                mainContent.style.display = 'block';
+                profileSection.style.display = 'block';
+                adminBadge.style.display = 'flex';
+                adminPanel.style.display = 'block';
+                studentClasses.style.display = 'none';
+                createAdminButtons();
+                highlightCurrentDay();
+                accessInfo.innerHTML = '<p>@<span class="full-access">BY AKASH SINGH</span> THANKS FOR VISITING</p>';
+            } else if (password === '85') {
+                accessLevel = 'limited';
+                profileName.textContent = 'Student Account';
+                profileAccess.textContent = 'Limited Access';
+                profileAccess.style.color = '#ffcc00';
+                loginError.style.display = 'none';
+                mainContent.style.display = 'block';
+                profileSection.style.display = 'block';
+                adminBadge.style.display = 'none';
+                adminPanel.style.display = 'none';
+                studentClasses.style.display = 'flex';
+                renderStudentClassButtons();
+                highlightCurrentDay();
+                accessInfo.innerHTML = '<p>@<span class="limited-access">BY AKASH SINGH</span> THANKS FOR VISITING</p>';
+            } else {
+                loginError.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        });
+        
+        // Logout functionality
+        logoutBtn.addEventListener('click', () => {
+            accessLevel = null;
+            mainContent.style.display = 'none';
+            profileSection.style.display = 'none';
+            adminBadge.style.display = 'none';
+            adminPanel.style.display = 'none';
+            studentClasses.style.display = 'flex';
+            passwordInput.value = '';
+            loginError.style.display = 'none';
+            
+            // Remove today highlight
+            if (currentDayRow) {
+                currentDayRow.classList.remove('today');
+            }
+        });
+        
+        // Allow pressing Enter to submit
+        passwordInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                loginSubmit.click();
+            }
+        });
+        
+        // Initialize time display
+        updateCurrentTime();
+        setInterval(updateCurrentTime, 1000);
+        highlightCurrentDay();
+    </script>
+</body>
+</html><style>body{
+  background-color:powderblue;
+}</style>
